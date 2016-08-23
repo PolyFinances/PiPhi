@@ -32,4 +32,4 @@ class Option:
         self.strike = strike
         self.maturity = maturity
         self.implied_volatility = implied_volatility
-        self.C0 = None
+        self.price = None

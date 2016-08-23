@@ -5,6 +5,7 @@
 # (c) Dr. Yves J. Hilpisch
 # Derivatives Analytics with Python
 #
+import time
 import math
 import numpy as np
 import matplotlib as mpl
@@ -134,9 +135,11 @@ def plot_values(function):
 def implied_volatility_call(St, K, t, T, r, call_value, precision=0.001):
     error = 100
     sigmaL = min(0.001, precision)
-    sigmaH = 1
+    sigmaH = 5
     while abs(error) >= precision:
+        # volatility of the  middle point
         sigmaM = (sigmaL+sigmaH)/2
+        # call value with the volatility of the middle point
         approxM = BSM_call_value(St, K, t, T, r, sigmaM)
         if approxM > call_value:
             sigmaH = sigmaM
@@ -152,7 +155,7 @@ def implied_volatility_call(St, K, t, T, r, call_value, precision=0.001):
 def implied_volatility_put(St, K, t, T, r, put_value, precision=0.001):
     error = 100
     sigmaL = min(0.001, precision)
-    sigmaH = 1
+    sigmaH = 5
     while abs(error) >= precision:
         sigmaM = (sigmaL+sigmaH)/2
         approxM = BSM_put_value(St, K, t, T, r, sigmaM)
@@ -168,16 +171,22 @@ def implied_volatility_put(St, K, t, T, r, put_value, precision=0.001):
 
 
 # r is usually around 0.5%
-def dividend_actualisation(div, t, r):
+def dividend_actualisation(div, t, r=0.05):
     div_actualised = div * math.exp(-t * r)
     return div_actualised
 
 
-
-# plot_values(BSM_put_value)
-# a, b = implied_volatility_put(762.16, 745, 0, 3.25/52, 0.0047, 34)
-# print(a, b)
-# c = BSM_put_value(762.16, 745, 0, 3.25/52, 0.005, a)
-# print(c)
-
-# print(implied_volatility_call(735.3, 740, 0, 122/254, 0.0047, 50))
+if __name__ == "__main__":
+    t1 = time.time()
+    # plot_values(BSM_put_value)
+    a = 0.5
+    x = 55
+    while a < 1.6:
+        a, b = implied_volatility_put(762.16, 745, 0, 3.25/52, 0.0047, x)
+        print(a, b)
+        x += 0.5
+        # c = BSM_put_value(762.16, 745, 0, 3.25/52, 0.005, a)
+        # print(c)
+    t2 = time.time()
+    print(t2-t1)
+    # print(implied_volatility_call(735.3, 740, 0, 122/254, 0.0047, 50))
