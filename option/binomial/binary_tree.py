@@ -91,13 +91,13 @@ def createTr(i, root):
         root.insertUpTree(createTr(i-1,root.getDown(), BinaryTree(i-1, root.getUp(),root)))
     return root
 
-def cr(i, option):
+def createTree(i, option):
     if i == 0:
         return BinaryTree(i,option)
     else:
         r =  BinaryTree(i,option)
-        r.insertDownTree(cr(i-1, option))
-        r.insertUpTree(cr(i-1, option))
+        r.insertDownTree(createTree(i-1, option))
+        r.insertUpTree(createTree(i-1, option))
         return r
 
 def computeSt(tree, option, n):
@@ -109,12 +109,12 @@ def computeSt(tree, option, n):
         elif tree.isDownChild():
             #print( tree.St + " " +str(tree.parent.St) + " " + str(option.getDown()))
             tree.St = tree.parent.St * option.getDown()
-            print( str(tree.St) + " " +str(tree.parent.St) + " " + str(option.getDown()))
+            #print( str(tree.St) + " " +str(tree.parent.St) + " " + str(option.getDown()))
             tree.drawPosition = (tree.parent.drawPosition[0]+10, tree.parent.drawPosition[1]-10)
 
         elif tree.isUpChild():
             tree.St =  tree.parent.St * option.getUp()
-            print(str( tree.St ) + " "+str(tree.parent.St) + " " + str(option.getUp()))
+            #print(str( tree.St ) + " "+str(tree.parent.St) + " " + str(option.getUp()))
             tree.drawPosition = (tree.parent.drawPosition[0]+10,tree.parent.drawPosition[1]+10)
         computeSt(tree.getDownChild(), option, n)
         computeSt(tree.getUpChild(), option, n)
@@ -172,6 +172,8 @@ def nodePositions(tree):
         #position.union(nodePositions(tree.getDownChild()))
         #position.union(nodePositions(tree.getUpChild()))
     return  position
+
+
 
 if __name__ == '__main__':
     #myTree = BinaryTree("root")
@@ -254,9 +256,9 @@ if __name__ == '__main__':
     #    node = node.getDownChild()
     #    print(node)
 
-    root = cr(n, option)
+    root = createTree(n, option)
     computeSt(root, option, n)
-    computePayOff(root,option,n)
+    print(computePayOff(root,option,n))
     #print(nodePositions(root))
     c = plot(root)
 
@@ -271,17 +273,17 @@ if __name__ == '__main__':
         d = [[p[0] for p in l], [p[1] for p in l]]
         #print(str(d[0])+""+str( d[1]))
         ax.plot(d[0], d[1], 'k-*')
-        print (str(d[0]) +" " + str(d[1]) +"d[0]")
+        #print (str(d[0]) +" " + str(d[1]) +"d[0]")
         #for p in l:
         #   noeuds.add(p)
 
 
-    print (noeuds)
+
 
     for p in noeuds:
         if p[3] == True:
             ax.annotate(str(round(p[1],2))+"\n\nPayOff="+str(round(p[2],2)), xy=p[0], arrowprops=dict(facecolor='black'), label="ss")
-            print(p[0])
+        # print(p[0])
         else :
             ax.annotate(str(round(p[1],2))+"\n\nPayOff="+str(round(p[2],2)), xy=p[0], label="")
         #ax.annotate(str(round(p[1],2)), xy=p[0])

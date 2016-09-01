@@ -140,7 +140,4 @@ if __name__ == '__main__':
     marketData = MarketData(r, volatility)
     stock_option = BinaryOption(type, style, underlying_price, strike, maturity, volatility, asset,marketData, 4)
 
-    print(stock_option)
-    print(stock_option.getUp())
-    print(stock_option.getDown())
-    print(stock_option.riskNeutralProbability())
+

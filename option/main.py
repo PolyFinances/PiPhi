@@ -1,9 +1,13 @@
 __author__ = 'sarra souissi'
 
 from option.binomial.binomial_option import BinaryOption
+
 from option.market_data import MarketData
 from option.option import Option
 
+from option.binomial.binary_tree import createTree
+from option.binomial.binary_tree import computeSt
+from option.binomial.binary_tree import computePayOff
 if __name__ == '__main__':
     underlying_price = 31  # index level
     strike = 30  # option_valuation strike
@@ -75,7 +79,11 @@ if __name__ == '__main__':
             steps = int(str_steps)
 
         binomial_stock_option = BinaryOption(option_type, style, underlying_price, strike, maturity, volatility, asset,marketData, steps)
+        root = createTree(steps, binomial_stock_option)
+        computeSt(root, binomial_stock_option, steps)
+        price = computePayOff(root,binomial_stock_option,steps)
 
+    print (price)
 
 
 
