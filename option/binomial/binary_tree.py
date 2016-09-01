@@ -1,8 +1,8 @@
 __author__ = "Sarah Souissi"
-from src.option.binomial.binomial_option import BinaryOption
+from option.binomial.binomial_option import BinaryOption
 import matplotlib.pyplot as plt
 import math
-from src.option.montecarlo.market_data import MarketData
+from option.market_data import MarketData
 
 class BinaryTree():
 
