@@ -74,7 +74,7 @@ if __name__ == '__main__':
         if (str_steps != "") :
             steps = int(str_steps)
 
-        stock_option = BinaryOption(option_type, style, underlying_price, strike, maturity, volatility, asset,marketData,steps)
+        binomial_stock_option = BinaryOption(option_type, style, underlying_price, strike, maturity, volatility, asset,marketData, steps)
 
 
 
