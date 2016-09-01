@@ -1,6 +1,9 @@
 __author__ = 'sarra souissi'
 
 from option.binomial.binomial_option import BinaryOption
+from option.market_data import MarketData
+from option.option import Option
+
 if __name__ == '__main__':
     underlying_price = 31  # index level
     strike = 30  # option_valuation strike
