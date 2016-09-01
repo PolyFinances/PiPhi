@@ -1,6 +1,6 @@
 __author__ = 'sarra souissi'
-from src.option.montecarlo.market_data import MarketData
-from src.option.option import Option
+from option.market_data import MarketData
+from option.option import Option
 if __name__ == '__main__':
     underlying_price = 31  # index level
     strike = 30  # option_valuation strike
