@@ -1,6 +1,5 @@
 __author__ = 'sarra souissi'
-from option.market_data import MarketData
-from option.option import Option
+
 from option.binomial.binomial_option import BinaryOption
 if __name__ == '__main__':
     underlying_price = 31  # index level
@@ -71,8 +70,9 @@ if __name__ == '__main__':
         str_steps = input("Steps (Default Value " + str(steps) + "): ")
         if (str_steps != "") :
             steps = int(str_steps)
+
         stock_option = BinaryOption(option_type, style, underlying_price, strike, maturity, volatility, asset,marketData,steps)
-        
+
 
 
 

@@ -1,7 +1,8 @@
 __author__ = "Olivier Lefebvre"
-import numpy as np
 import matplotlib.pyplot as plt
-from option.montecarlo.random_number_generator import RandomNumberGenerator as rng
+import numpy as np
+
+from option.montecarlo import RandomNumberGenerator as rng
 
 
 class MonteCarloSimulation:

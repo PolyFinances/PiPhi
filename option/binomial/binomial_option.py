@@ -1,7 +1,10 @@
 __author__ = 'Sarra Souissi'
 import math
-from option.option import Option
+
 from option.market_data import MarketData
+
+from option.option import Option
+
 
 class BinaryOption (Option):
 

@@ -1,9 +1,12 @@
 __author__ = "Olivier Lefebvre"
 
 import math
+
 import numpy as np
 from numpy.fft import fft, ifft
+
 from option.binomial.binomial_valuation import BinomialValuation as bn
+
 
 class Fourier:
 
