@@ -1,8 +1,8 @@
 __author__ = "Sarah Souissi"
-from src.option.binomial.binomial_option import Option
+from src.option.binomial.binomial_option import BinaryOption
 import matplotlib.pyplot as plt
 import math
-
+from src.option.montecarlo.market_data import MarketData
 
 class BinaryTree():
 
@@ -13,7 +13,7 @@ class BinaryTree():
         self.option = option
         self.drawPosition = (0,i)
         self.i = i
-        self.St = option.S0
+        self.St = option.underlying_price
         self.exercice = False
 
 
@@ -103,7 +103,7 @@ def cr(i, option):
 def computeSt(tree, option, n):
     if tree!= None:
         if (tree.isRoot()) :
-            tree.St = option.S0
+            tree.St = option.underlying_price
             tree.drawPosition =(0, (n+1)*10)
 
         elif tree.isDownChild():
@@ -131,7 +131,7 @@ def computePayOff(tree, option, n):
         p = option.riskNeutralProbability()
         fd = computePayOff(tree.getDownChild(), option,n)
         fu = computePayOff(tree.getUpChild(), option,n)
-        payOffBinomal = math.exp(-option.r*option.T/n)*(p*fu+(1-p)*fd)
+        payOffBinomal = math.exp(-option.market_data.r*option.maturity/n)*(p*fu+(1-p)*fd)
         if option.style == 2 :
             pay_off_american_option = option.payOff(tree.St)
             if pay_off_american_option > payOffBinomal :
@@ -190,11 +190,11 @@ if __name__ == '__main__':
     #print(myTree2.nbChildren())
     #print(myTree2.profondeur())
     #node = myTree
-    S0 = 31  # index level
-    K = 30  # option_valuation strike
-    T = 0.75  # maturity date
+    underlying_price = 31  # index level
+    strike = 30  # option_valuation strike
+    maturity = 0.75  # maturity date
     r = 0.05  # risk-less short rate
-    sigma = 0.3  # volatility
+    volatility = 0.3  # volatility
     n = 3 #Steps
     style = 1
     asset = 4
@@ -239,7 +239,11 @@ if __name__ == '__main__':
     #if (str_asset != "") :
     #    asset = int(str_asset)
 
-    option = Option(S0, K, T, r, sigma,n,style,type,asset)
+#    option = Option(S0, strike, maturity, r, volatility, n, style, type, asset)
+
+    marketData = MarketData(r, volatility)
+    option = BinaryOption(type, style, underlying_price, strike, maturity, volatility, asset,marketData, 4)
+
     #print(option)
     #root = BinaryTree(n,1, None ,option)
     #myTree2 = createTr(n,root)
