@@ -2,7 +2,7 @@ __author__ = "Olivier Lefebvre"
 import matplotlib.pyplot as plt
 import numpy as np
 
-from option.montecarlo import RandomNumberGenerator as rng
+from valuation.montecarlo import random_number_generator as rng
 
 
 class MonteCarloSimulation:

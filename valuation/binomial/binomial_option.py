@@ -1,9 +1,9 @@
 __author__ = 'Sarra Souissi'
 import math
 
-from option.market_data import MarketData
+from valuation.market_data import MarketData
 
-from option.option import Option
+from valuation.option import Option
 
 
 class BinaryOption (Option):
@@ -132,7 +132,7 @@ if __name__ == '__main__':
     maturity = 0.75  # maturity date
     r = 0.05  # risk-less short rate
     volatility = 0.3  # volatility
-    n = 3 #Steps
+    n = 3  # Steps
     style = 1
     asset = 4
     type = 2

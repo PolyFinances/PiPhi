@@ -1,5 +1,6 @@
-__author__ = "Olivier Lefebvre"
 import numpy as np
+
+__author__ = "Olivier Lefebvre"
 
 
 class MarketData:
@@ -26,8 +27,8 @@ class MarketData:
         self.kappa = kappa
         self.std_volatility = std_volatility
 
-        #Computation of correlation if needed. The cholesky matrix allows to correlate numbers
-        #with the correlation specified by rho
+        #  Computation of correlation if needed. The cholesky matrix allows to correlate numbers
+        #  with the correlation specified by rho
         if self.rho is not None:
             corr_mat = np.zeros((2, 2))
             corr_mat[0, :] = [1.0, rho]
